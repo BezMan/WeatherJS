@@ -34,6 +34,31 @@ router.get('/city/:cityName', function (req, res) {
     })
 })
 
+router.get('/cities', function (req, res) {
+    City.find({}, function (err, citiesResponse) {
+        res.send(citiesResponse)
+    })
+})
+
+router.post('/city', function (req, res) {
+    let newCity = new City({
+        name: req.body.name,
+        temperature: req.body.temperature,
+        condition: req.body.condition,
+        conditionPic: req.body.conditionPic
+    })
+    City.findOne({ name: newCity.name }, function (err, foundCity) {
+        if (!foundCity) {
+            newCity.save().then(function (city) {
+                res.send(`${city.name} was added successfully!`)
+            })
+        }
+        else {
+            res.send(`${city.name} already exists!`)
+        }
+    })
+})
+
 // router.post('/new', function (req, res) {
 //     var body = req.body
 
