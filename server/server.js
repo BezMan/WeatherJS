@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //parser middleware must be setup before the route definitions//
+app.use(express.static(path.join(__dirname, "..", 'dist')))
+app.use(express.static(path.join(__dirname,  "..", 'node_modules')))
 app.use('/', api)
 
 let port = 3000
