@@ -2,7 +2,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const Expense = require("./model/City")
+const path = require('path')
 
 const api = require('./routes/api')
 
