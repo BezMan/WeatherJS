@@ -59,59 +59,20 @@ router.post('/city', function (req, res) {
     })
 })
 
-// router.post('/new', function (req, res) {
-//     var body = req.body
 
-//     var exp = new City({
-//         name: body.item,
-//         amount: body.amount,
-//         date: body.date ? moment(body.date).format('LLLL') : new Date(), // if exists then format, else insert new Date()
-//         group: body.group,
-//     });
+router.delete('/city/:cityName', function (req, res) {
+    const city = req.params.cityName
 
-//     exp.save().then(function (exp) { //save new expense to the DB, use promise for callback
-//         console.log(`You spent ${exp.amount} shekels in ${exp.name} on ${exp.date}`);
-//         res.end()
-//     })
+    City.findOne({ name: city }, function (err, foundCity) {
+        if (foundCity != null) {
+            console.log(`removing ${foundCity.name}`);
+            foundCity.remove()
+            res.send(`${city} was removed`)
+        }else{
+            res.send(`${city} not found`)
+        }
 
-// })
-
-// //not necessary to define params, just get them from req.body
-// router.put('/update', function (req, res) {
-//     let group1 = req.body.group1
-//     let group2 = req.body.group2
-//     City.findOneAndUpdate(
-//         { group: group1 },
-//         { group: group2 },
-//         { new: true },
-//         function (err, result) {
-//             console.log(`changed ${result.name} from group ${group1} to ${group2}`)
-//             res.send(`changed ${result.name} from group ${group1} to ${group2}`)
-//         })
-// })
-
-
-// router.get('/expenses/:group', function (req, res) {
-//     let group = req.params.group
-//     // Expense.find({ group: group }, function (err, expenses) {
-//     // console.log(expenses)
-//     // })
-//     City.aggregate([
-//         { $match: { group: group } },
-//         {
-//             $group: {
-//                 _id: group,
-//                 total: { $sum: "$amount" }
-//             }
-//         }
-//     ],
-//         function (err, result) {
-//             console.log("You spent " + result[0].total + " in " + group);
-//             res.send("end cycle")
-//         })
-
-// })
-
-
+    })
+})
 
 module.exports = router
