@@ -13,23 +13,7 @@ router.get('/city/:cityName', function (req, res) {
 
         if (!error && response.statusCode == 200) {
             const result = JSON.parse(body)
-            const newCity = new City({
-                name: result.name,
-                temperature: result.main.temp,
-                condition: result.weather[0].description,
-                conditionPic: result.weather[0].icon
-            })
-
-            City.findOne({ name: newCity.name }, function (err, foundCity) {
-                if (!foundCity) {//only save if not existing already
-                    console.log("save city: " + newCity)
-                    newCity.save()
-                    res.send(newCity)
-                }
-                else {
-                    res.send("already saved " + newCity.name)
-                }
-            })
+            res.send(result)
         }
     })
 })
