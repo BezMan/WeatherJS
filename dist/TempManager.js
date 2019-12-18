@@ -1,7 +1,6 @@
-//the client managing calls to api routes 
+//the client managing calls to api routes
 
-class TempManager { 
-
+class TempManager {
   constructor() {
     this.cityData = [];
   }
@@ -11,7 +10,10 @@ class TempManager {
   }
 
   async getCityData(cityName) {
-    if (this.cityData.find(d => d.name.toLowerCase() == cityName.toLowerCase()) == undefined) {
+    if (
+      this.cityData.find(d => d.name.toLowerCase() == cityName.toLowerCase()) ==
+      undefined
+    ) {
       const cityData = await $.get(`/city/${cityName}`);
       console.log(cityData);
       const newCity = {
@@ -21,7 +23,7 @@ class TempManager {
         conditionPic: `http://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`
       };
       this.cityData.push(newCity);
-      renderer.emptySearchText()
+      renderer.emptySearchText();
     }
   }
   async saveCity(cityName) {

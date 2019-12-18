@@ -3,16 +3,14 @@
 const tempManager = new TempManager();
 const renderer = new Renderer();
 
-
 function refreshPage() {
-    renderer.renderData(tempManager.cityData);
+  renderer.renderData(tempManager.cityData);
 }
 
 const loadPage = async function() {
-    await tempManager.getDataFromDB();
-    refreshPage();
+  await tempManager.getDataFromDB();
+  refreshPage();
 };
-
 
 //CLICK EVENTS//
 $("#search-button").on("click", async function handleSearch() {
@@ -21,23 +19,26 @@ $("#search-button").on("click", async function handleSearch() {
   refreshPage();
 });
 
-
 $("#container").on("click", ".save-button", async function handleSaveCity() {
-  const cityName = $(this).closest(`div`).find(`.city-name`).text();
+  const cityName = $(this)
+    .closest(`div`)
+    .find(`.city-name`)
+    .text();
   await tempManager.saveCity(cityName);
   refreshPage();
 });
 
-
-$("#container").on("click", ".remove-button", async function handleRemoveCity() {
-    const cityName = $(this).closest(`div`).find(".city-name").text();
+$("#container").on(
+  "click",
+  ".remove-button",
+  async function handleRemoveCity() {
+    const cityName = $(this)
+      .closest(`div`)
+      .find(".city-name")
+      .text();
     await tempManager.removeCity(cityName);
     refreshPage();
-}
+  }
 );
 
-
 loadPage();
-
-
-
