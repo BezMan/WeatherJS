@@ -1,14 +1,37 @@
+/* :root {
+    --primary-color: #1cf0f1;
+}
+
 #cityName-input{
     color: blueviolet;
     font-weight: bold;
     padding: 5px;
     margin: 10px;
+    min-width: 300px;
+    
 }
 
 #search-button{
+    color: lightblue;
+}
+
+#search-button:hover{
     color: blue;
 }
 
 #displayed-alert{
     color: red;
 }
+
+
+@media(max-width: 768px){
+    input{
+      display: block;
+    }
+    #cityName-input{
+        color: var(--primary-color);
+        padding: 5px;
+        margin: 10px;    
+        height: 5vh;
+    
+  } */

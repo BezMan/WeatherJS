@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<head><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Weather App</title><link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+<head>
+
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
-    <input id="cityName-input" type="text" placeholder="Enter City name">
+    <div class="row">
+        <input id="cityName-input" class="input green col s12 m6 l3" type="text" placeholder="Enter City name">
+
+        <p id="displayed-alert" hidden=true>already displayed</p>
     
-    <p id="displayed-alert" hidden=true>already displayed</p>
-    
-    <button id = "search-button"> SEARCH </button>
+        <button id = "search-button" class="waves-effect orange btn col "> SEARCH </button>
+    </div>
     
     <div id="container"></div>
+
     
 
     <script id="cities-template" type="text/x-handlebars-template">
@@ -29,7 +39,18 @@
         {{/each}}
     </script>
 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+    <!-- <script type="text/javascript" src="./materialize-css/dist/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./materialize-css/dist/css/materialize.min.css"></script>
+    <script src="./materialize-css/dist/materialize.js"></script>
+    <script src="./materialize-css/dist/js/materialize.js"></script>
+    <script src="./materialize-css/dist/css/materialize.css"></script> -->
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="TempManager.js"></script>
