@@ -1,3 +1,5 @@
+//server side routes
+
 const express = require('express')
 const router = express.Router()
 const request = require('request')
@@ -6,6 +8,15 @@ const City = require("../model/City")
 const WEATHER_PATH = "http://api.openweathermap.org/data/2.5"
 const APP_ID = "a6fb62a4df6500bb3078d7e190bd637e"
 
+
+//getDataFromDB
+router.get('/cities', function (req, res) {
+    City.find({}, function (err, citiesResponse) {
+        res.send(citiesResponse)
+    })
+})
+
+//clicked search
 router.get('/city/:cityName', function (req, res) {
     const cityName = req.params.cityName
     weatherRoute = `${WEATHER_PATH}/weather?q=${cityName}&appid=${APP_ID}`
@@ -18,12 +29,7 @@ router.get('/city/:cityName', function (req, res) {
     })
 })
 
-router.get('/cities', function (req, res) {
-    City.find({}, function (err, citiesResponse) {
-        res.send(citiesResponse)
-    })
-})
-
+//clicked save
 router.post('/city', function (req, res) {
     let newCity = new City({
         name: req.body.name,
@@ -44,6 +50,7 @@ router.post('/city', function (req, res) {
 })
 
 
+//clicked remove
 router.delete('/city/:cityName', function (req, res) {
     const city = req.params.cityName
 

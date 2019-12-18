@@ -1,25 +1,27 @@
-class TempManager {
-    
+//the client managing calls to api routes 
+
+class TempManager { 
+
   constructor() {
     this.cityData = [];
   }
 
   async getDataFromDB() {
-    let dbData = await $.get(`/cities`);
-    this.cityData = dbData;
+    this.cityData = await $.get(`/cities`);
   }
 
   async getCityData(cityName) {
-    const APIdata = await $.get(`/city/${cityName}`);
-    console.log(APIdata);
-    const newCity = {
-      name: APIdata.name,
-      temperature: APIdata.main.temp,
-      condition: `${APIdata.weather[0].main} ${APIdata.weather[0].description}`,
-      conditionPic: `http://openweathermap.org/img/wn/${APIdata.weather[0].icon}@2x.png`
-    };
-    if (this.cityData.find(d => d.name == cityName) == undefined) {
+    if (this.cityData.find(d => d.name.toLowerCase() == cityName.toLowerCase()) == undefined) {
+      const cityData = await $.get(`/city/${cityName}`);
+      console.log(cityData);
+      const newCity = {
+        name: cityData.name,
+        temperature: cityData.main.temp,
+        condition: `${cityData.weather[0].main} ${cityData.weather[0].description}`,
+        conditionPic: `http://openweathermap.org/img/wn/${cityData.weather[0].icon}@2x.png`
+      };
       this.cityData.push(newCity);
+      renderer.emptySearchText()
     }
   }
   async saveCity(cityName) {
