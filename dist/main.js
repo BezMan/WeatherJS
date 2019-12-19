@@ -12,6 +12,9 @@ const loadPage = async function() {
   refreshPage();
 };
 
+loadPage();
+
+
 //CLICK EVENTS//
 $("#search-button").on("click", async function handleSearch() {
   const cityNameInput = $("#cityName-input").val();
@@ -41,4 +44,20 @@ $("#container").on(
   }
 );
 
-loadPage();
+
+
+//HELPER METHODS//
+
+//click ENTER - starts search//
+var input = document.getElementById("cityName-input");
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("search-button").click();
+  }
+});
+
